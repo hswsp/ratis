@@ -47,7 +47,6 @@ public class TestSubCommand {
     String minimalPeers = "peer1:localhost:9999";
     
     RaftPeer[] peers = SubCommandBase.parsePeers(minimalPeers);
-
     
     Assertions.assertEquals(1, peers.length);
     
