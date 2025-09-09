@@ -20,3 +20,4 @@ patchprocess
 dependency-reduced-pom.xml
 .mvn/wrapper/maven-wrapper.jar
 .vscode/
+*.class

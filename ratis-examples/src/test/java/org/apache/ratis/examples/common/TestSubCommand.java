@@ -21,7 +21,10 @@ package org.apache.ratis.examples.common;
 
 import java.util.Collection;
 import java.util.Collections;
+
+import org.apache.ratis.protocol.RaftPeer;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -36,6 +39,20 @@ public class TestSubCommand {
   public void testParsePeers(String peers) {
     Assertions.assertThrows(IllegalArgumentException.class,
         () -> SubCommandBase.parsePeers(peers));
+  }
+
+  @Test
+  public void testParseMinimalValidPeers() {
+    // Test minimal valid peer format (name:host:port)
+    String minimalPeers = "peer1:localhost:9999";
+    
+    RaftPeer[] peers = SubCommandBase.parsePeers(minimalPeers);
+    
+    Assertions.assertEquals(1, peers.length);
+    
+    RaftPeer peer = peers[0];
+    Assertions.assertEquals("peer1", peer.getId().toString());
+    Assertions.assertEquals("localhost:9999", peer.getAddress());
   }
 
 }
